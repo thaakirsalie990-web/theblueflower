@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELORA | Modern Fashion Store</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/input.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+</head>
+<body>
+
+    <!-- =====================
+            Header Section
+    ========================== -->
+    <header class="header">
+        <div class="header__container">
+            <div class="header__logo">
+                <img src="assets/images/logo.svg" alt="Velora Logo" class="header__logo-img">
+            </div>
+
+            <nav class="header__nav-desktop">
+                <ul class="header__nav-list">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#shop">Shop</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header__actions">
+                <div class="header__price">$0.00</div>
+                
+                <div class="header__cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="header__badge">0</span>
+                </div>
+
+                <button class="header__menu-btn" id="menuToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile/Drawer Menu -->
+        <nav class="nav-drawer" id="navDrawer">
+            <button class="nav-drawer__close" id="menuClose">
+                <i class="fa-solid fa-times"></i>
+            </button>
+            <ul class="nav-drawer__list">
+                <li class="nav-drawer__item"><a href="#" class="nav-drawer__link">Home</a></li>
+                <li class="nav-drawer__item"><a href="#about" class="nav-drawer__link">About</a></li>
+                <li class="nav-drawer__item"><a href="#shop" class="nav-drawer__link">Shop</a></li>
+                <li class="nav-drawer__item"><a href="#contact" class="nav-drawer__link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- =====================
+                Hero Section
+        ========================== -->
+        <section class="hero">
+            <div class="hero__overlay"></div>
+            <div class="hero__content">
+                <h1 class="hero__title">Raining Offers For Hot Summer!</h1>
+                <p class="hero__subtitle">25% Off On All Products</p>
+                <div class="hero__buttons">
+                    <a href="#shop" class="btn btn--primary">SHOP NOW</a>
+                    <a href="#about" class="btn btn--outline">FIND MORE</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================
+            Brands Strip
+        ========================== -->
+        <section class="brands">
+            <div class="brands__container">
+                <i class="fa-brands fa-pied-piper brands__icon"></i>
+                <i class="fa-brands fa-atlassian brands__icon"></i>
+                <i class="fa-brands fa-instagram brands__icon"></i>
+                <i class="fa-brands fa-apple brands__icon"></i>
+                <i class="fa-brands fa-aws brands__icon"></i>
+            </div>
+        </section>
+
+        <!-- =====================
+            Category Banners
+        ========================== -->
+        <section class="banners">
+            <!-- Banner 1 -->
+            <article class="banner banner--tank">
+                <div class="banner__overlay"></div>
+                <div class="banner__content">
+                    <h2 class="banner__title">20% Off On Tank Tops</h2>
+                    <p class="banner__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <a href="#" class="btn btn--white">SHOP NOW</a>
+                </div>
+            </article>
+
+            <!-- Banner 2 -->
+            <article class="banner banner--eyewear">
+                <div class="banner__overlay"></div>
+                <div class="banner__content">
+                    <h2 class="banner__title">Latest Eyewear For You</h2>
+                    <p class="banner__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <a href="#" class="btn btn--white">SHOP NOW</a>
+                </div>
+            </article>
+
+            <!-- Banner 3 -->
+            <article class="banner banner--suit">
+                <div class="banner__overlay"></div>
+                <div class="banner__content">
+                    <h2 class="banner__title">Let's Lorem Suit Up!</h2>
+                    <p class="banner__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <a href="#" class="btn btn--white">CHECK OUT</a>
+                </div>
+            </article>
+        </section>
+
+        <!-- =====================
+            Featured Products
+        ========================== -->
+        <section class="featured" id="shop">
+            <div class="container">
+                <h2 class="section-title">Featured Products</h2>
+                <div class="section-divider"></div>
+                
+                <div class="product-grid">
+                    <!-- Products generated dynamically or hardcoded here to match reference -->
+                    <!-- Item 1 -->
+                    <div class="product-card">
+                        <div class="product-card__image-wrapper">
+                            <span class="product-card__badge">Sale!</span>
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=60" alt="Shoes" class="product-card__img">
+                        </div>
+                        <div class="product-card__info">
+                            <h3 class="product-card__title">Velora Yellow Shoes</h3>
+                            <span class="product-card__category">Men</span>
+                            <div class="product-card__price"><span class="price--old">$150.00</span> $120.00</div>
+                            <div class="product-card__rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="product-card">
+                        <div class="product-card__image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1512374382149-233c42b6a83b?auto=format&fit=crop&w=500&q=60" alt="Blue Shoes" class="product-card__img">
+                        </div>
+                        <div class="product-card__info">
+                            <h3 class="product-card__title">Velora Blue Shoes</h3>
+                            <span class="product-card__category">Men</span>
+                            <div class="product-card__price">$200.00 – $240.00</div>
+                            <div class="product-card__colors">
+                                <span class="color-dot color-dot--blue"></span>
+                                <span class="color-dot color-dot--green"></span>
+                                <span class="color-dot color-dot--orange"></span>
+                            </div>
+                            <div class="product-card__rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="product-card">
+                        <div class="product-card__image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=500&q=60" alt="Jeans" class="product-card__img">
+                        </div>
+                        <div class="product-card__info">
+                            <h3 class="product-card__title">Dark Brown Jeans</h3>
+                            <span class="product-card__category">Men</span>
+                            <div class="product-card__price">$150.00</div>
+                            <div class="product-card__rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="product-card">
+                        <div class="product-card__image-wrapper">
+                             <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=500&q=60" alt="Jeans" class="product-card__img" style="filter: hue-rotate(180deg);">
+                        </div>
+                        <div class="product-card__info">
+                            <h3 class="product-card__title">Blue Denim Jeans</h3>
+                            <span class="product-card__category">Women</span>
+                            <div class="product-card__price">$150.00</div>
+                            <div class="product-card__rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="product-card">
+                        <div class="product-card__image-wrapper">
+                             <img src="https://images.unsplash.com/photo-1584370848010-d7d6acbe9fa7?auto=format&fit=crop&w=500&q=60" alt="Jeans" class="product-card__img">
+                        </div>
+                        <div class="product-card__info">
+                            <h3 class="product-card__title">Basic Gray Jeans</h3>
+                            <span class="product-card__category">Women</span>
+                            <div class="product-card__price">$150.00</div>
+                            <div class="product-card__rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 6 -->
+                    <div class="product-card">
+                        <div class="product-card__image-wrapper">
+                            <span class="product-card__badge">Sale!</span>
+                            <img src="https://images.unsplash.com/photo-1591195853828-11db59a44f6b?auto=format&fit=crop&w=500&q=60" alt="Shorts" class="product-card__img">
+                        </div>
+                        <div class="product-card__info">
+                            <h3 class="product-card__title">Blue Denim Shorts</h3>
+                            <span class="product-card__category">Women</span>
+                            <div class="product-card__price"><span class="price--old">$150.00</span> $130.00</div>
+                            <div class="product-card__rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================
+            Special Edition
+        ========================== -->
+        <section class="special">
+            <div class="container special__container">
+
+                <div class="special__content">
+                    <span class="special__pre">Limited Time Offer</span>
+                    <h2 class="special__title">Special Edition</h2>
+                    <p class="special__text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                    </p>
+                    <p class="special__promo">Buy This T-shirt At 20% Discount, Use Code OFF20</p>
+                    <a href="#" class="btn btn--white">SHOP NOW</a>
+                </div>
+
+                <div class="special__image">
+                    <img src="https://images.unsplash.com/photo-1617137968427-85924c809a10?auto=format&fit=crop&w=600&q=80" alt="Special Edition Fashion">
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================
+           About Section (Generated)
+        ========================== -->
+        <!-- GENERATED SECTION: About Us (Missing in reference) -->
+        <section class="about" id="about">
+            <div class="container about__container">
+                <div class="about__text">
+                    <h2 class="section-title section-title--left">Who We Are</h2>
+                    <p>Velora is a contemporary fashion brand dedicated to sustainable style. We believe in quality materials, ethical production, and timeless designs that empower you to look your best.</p>
+                    <a href="#" class="btn btn--primary">Learn More</a>
+                </div>
+                <div class="about__image">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80" alt="Fashion Model">
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================
+           Testimonials (Generated)
+        ========================== -->
+        <!-- GENERATED SECTION: Testimonials (Missing in reference) -->
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section-title">Customer Reviews</h2>
+                <div class="section-divider"></div>
+                <div class="testimonials__grid">
+                    <div class="testimonial-card">
+                        <p class="testimonial-card__text">"Absolutely love the denim quality! Fits perfectly and feels amazing."</p>
+                        <h4 class="testimonial-card__author">- Sarah J.</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-card__text">"Fast shipping and the packaging was beautiful. Will buy again."</p>
+                        <h4 class="testimonial-card__author">- Mike T.</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-card__text">"The sunglasses are top-notch. Highly recommend Velora."</p>
+                        <h4 class="testimonial-card__author">- Emily R.</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================
+            Features Section
+        ========================== -->
+        <section class="features">
+            <div class="container">
+                <div class="features__grid">
+                    <div class="feature-item">
+                        <i class="fa-solid fa-earth-americas feature-item__icon"></i>
+                        <h3 class="feature-item__title">Worldwide Shipping</h3>
+                        <p class="feature-item__text">It elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-person-dress feature-item__icon"></i>
+                        <h3 class="feature-item__title">Best Quality</h3>
+                        <p class="feature-item__text">It elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-tags feature-item__icon"></i>
+                        <h3 class="feature-item__title">Best Offers</h3>
+                        <p class="feature-item__text">It elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-lock feature-item__icon"></i>
+                        <h3 class="feature-item__title">Secure Payments</h3>
+                        <p class="feature-item__text">It elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================
+           Contact Section (Generated)
+        ========================== -->
+        <!-- GENERATED SECTION: Contact (Missing in reference) -->
+        <section class="contact" id="contact">
+            <div class="container contact__container">
+                <h2 class="section-title">Stay In Touch</h2>
+                <p>Subscribe for the latest updates and offers.</p>
+                <form class="contact__form">
+                    <input type="email" placeholder="Your Email Address" required>
+                    <button type="submit" class="btn btn--primary">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- =====================
+            Footer
+        ========================== -->
+        <footer class="footer">
+            <div class="container footer__container">
+                <div class="footer__col">
+                    <h3 class="footer__title">Quick Links</h3>
+                    <ul class="footer__list">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Cart</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h3 class="footer__title">For Her</h3>
+                    <ul class="footer__list">
+                        <li><a href="#">Women Jeans</a></li>
+                        <li><a href="#">Tops and Shirts</a></li>
+                        <li><a href="#">Women Jackets</a></li>
+                        <li><a href="#">Heels and Flats</a></li>
+                        <li><a href="#">Women Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h3 class="footer__title">For Him</h3>
+                    <ul class="footer__list">
+                        <li><a href="#">Men Jeans</a></li>
+                        <li><a href="#">Men Shirts</a></li>
+                        <li><a href="#">Men Shoes</a></li>
+                        <li><a href="#">Men Accessories</a></li>
+                        <li><a href="#">Men Jackets</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col footer__col--app">
+                    <h3 class="footer__title">For Him</h3> <!-- Maintained typo from ref or intent? Assuming duplicate col for app -->
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" width="150">
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">Copyright © 2025 Velora Fashion</p>
+                <p class="footer__powered">Powered by Brandstore</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="js/script.js" defer></script>
+</body>
+</html>

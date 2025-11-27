@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store | VELORA</title>
+    <link rel="stylesheet" href="css/input.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <!-- =====================
+            Header Section
+    ========================== -->
+    <header class="header header--static">
+
+        <div class="header__container container">
+
+            
+                <div class="header__logo">
+                    <img src="assets/images/logo.svg" alt="Velora Logo" class="header__logo-img">
+                </div>    
+            
+
+            <nav class="header__nav-desktop">
+            <ul class="header__nav-list">
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            </nav>
+            
+            <div class="header__actions">
+                <div class="header__price">$0.00</div>
+                
+                <div class="header__cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="header__badge">0</span>
+                </div>
+
+                <button class="header__menu-btn" id="menuToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile/Drawer Menu -->
+        <nav class="nav-drawer" id="navDrawer">
+            <button class="nav-drawer__close" id="menuClose">
+                <i class="fa-solid fa-times"></i>
+            </button>
+            <ul class="nav-drawer__list">
+                <li class="nav-drawer__item"><a href="#" class="nav-drawer__link">Home</a></li>
+                <li class="nav-drawer__item"><a href="#about" class="nav-drawer__link">About</a></li>
+                <li class="nav-drawer__item"><a href="#shop" class="nav-drawer__link">Shop</a></li>
+                <li class="nav-drawer__item"><a href="#contact" class="nav-drawer__link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- =====================
+            Shop Layout
+    ========================== -->
+    <div class="container shop-layout">
+        
+        <!-- MAIN CONTENT -->
+        <main class="shop-content">
+            
+            <div class="shop-toolbar">
+                <div class="shop-toolbar__breadcrumbs">
+                    <a href="index.html">Home</a> / <span>Store</span>
+                </div>
+                <div class="shop-toolbar__results">
+                    <p>Showing 1–12 of 31 results</p>
+                    <select class="shop-toolbar__sort">
+                        <option value="default">Default sorting</option>
+                        <option value="popularity">Sort by popularity</option>
+                        <option value="rating">Sort by average rating</option>
+                        <option value="latest">Sort by latest</option>
+                        <option value="price">Sort by price: low to high</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Products -->
+            <div class="product-grid" id="productGrid">
+
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="pagination__link pagination__link--active">1</a>
+                <a href="#" class="pagination__link">2</a>
+                <a href="#" class="pagination__link">3</a>
+                <a href="#" class="pagination__link"><i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+        </main>
+
+        <!-- SIDEBAR (Now Second in HTML - appears at bottom on mobile) -->
+        <aside class="sidebar">
+            
+            <!-- Widget: Search -->
+            <div class="widget">
+                <form class="widget-search">
+                    <input type="text" placeholder="Search products...">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </div>
+
+            <!-- Widget: Filter Price -->
+            <div class="widget">
+                <h3 class="widget__title">Filter by Price</h3>
+                <div class="price-filter">
+                    <input type="range" class="price-slider" min="20" max="290" value="290" id="priceRange">
+                    <div class="price-filter__actions">
+                        <button class="btn btn--primary btn--sm">FILTER</button>
+                        <div class="price-filter__label">Price: <span class="price-min">$20</span> — <span class="price-max" id="priceValue">$290</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Widget: Categories -->
+            <div class="widget">
+                <h3 class="widget__title">Categories</h3>
+                <ul class="widget-categories">
+                    <li><a href="#" data-val="all">All Products</a></li>
+                    <li><a href="#" data-val="Accessories">Accessories</a> <span>(7)</span></li>
+                    <li><a href="#" data-val="Men">Men</a> <span>(14)</span></li>
+                    <li><a href="#" data-val="Women">Women</a> <span>(17)</span></li>
+                </ul>
+            </div>
+
+            <!-- Widget: Best Sellers -->
+            <div class="widget">
+                <h3 class="widget__title">Our Best Sellers</h3>
+                <div class="widget-products">
+                     <!-- Mini Products (Keep existing code) -->
+                     <!-- ... -->
+                </div>
+            </div>
+
+        </aside>
+    </div>
+
+    <!-- =====================
+            Footer
+    ========================== -->
+    <footer class="footer">
+        <div class="container footer__container">
+            <div class="footer__col">
+                <h3 class="footer__title">Quick Links</h3>
+                <ul class="footer__list">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Cart</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h3 class="footer__title">For Her</h3>
+                <ul class="footer__list">
+                    <li><a href="#">Women Jeans</a></li>
+                    <li><a href="#">Tops and Shirts</a></li>
+                    <li><a href="#">Women Jackets</a></li>
+                    <li><a href="#">Heels and Flats</a></li>
+                    <li><a href="#">Women Accessories</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h3 class="footer__title">For Him</h3>
+                <ul class="footer__list">
+                    <li><a href="#">Men Jeans</a></li>
+                    <li><a href="#">Men Shirts</a></li>
+                    <li><a href="#">Men Shoes</a></li>
+                    <li><a href="#">Men Accessories</a></li>
+                    <li><a href="#">Men Jackets</a></li>
+                </ul>
+            </div>
+            <div class="footer__col footer__col--app">
+                <h3 class="footer__title">Get The App</h3> 
+                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" width="150">
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p class="footer__copyright">Copyright © 2025 Velora Fashion</p>
+            <p class="footer__powered">Powered by Brandstore</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js" defer></script>
+</body>
+</html>
