@@ -61,6 +61,14 @@ ul {
     height: 3px;
     background-color: $color-primary;
     margin: 0 auto $space-5 auto;
+
+    &--left {
+        margin: 0 0 $space-4 0;
+    }
+}
+
+.section-padding {
+    padding: $space-6 0;
 }
 
 .btn {
@@ -106,7 +114,7 @@ ul {
       Header
 ========================= */
 .header {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -143,6 +151,8 @@ ul {
 
         @media (min-width: $break-lg) {
             display: block;
+            position: sticky;
+            top: 0;
         }
 
         .header__nav-list {

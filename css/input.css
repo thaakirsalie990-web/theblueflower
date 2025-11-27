@@ -63,6 +63,13 @@ ul {
   background-color: #0084D6;
   margin: 0 auto 2rem auto;
 }
+.section-divider--left {
+  margin: 0 0 1.5rem 0;
+}
+
+.section-padding {
+  padding: 4rem 0;
+}
 
 .btn {
   display: inline-block;
@@ -104,7 +111,7 @@ ul {
       Header
 ========================= */
 .header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -138,6 +145,8 @@ ul {
 @media (min-width: 1024px) {
   .header__nav-desktop {
     display: block;
+    position: sticky;
+    top: 0;
   }
 }
 .header__nav-desktop .header__nav-list {
@@ -947,6 +956,179 @@ ul {
 }
 .color-dot--orange {
   background-color: orange;
+}
+
+/* =====================
+      About Page Styles
+========================= */
+.hero-about {
+  height: 60vh;
+  min-height: 400px;
+  background-image: url("https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1920&q=80");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: -80px;
+}
+.hero-about__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 80, 150, 0.6);
+}
+.hero-about__content {
+  position: relative;
+  z-index: 10;
+}
+.hero-about__title {
+  color: #fff;
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+@media (min-width: 768px) {
+  .hero-about__title {
+    font-size: 5rem;
+  }
+}
+
+/* =====================
+      Who We Are Section
+========================= */
+.who-we-are {
+  background-color: #fff;
+}
+.who-we-are__container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+@media (min-width: 1024px) {
+  .who-we-are__container {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+.who-we-are__text {
+  flex: 1;
+}
+.who-we-are__text p {
+  color: #777;
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+.who-we-are__image {
+  flex: 1;
+}
+.who-we-are__image img {
+  width: 100%;
+  height: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* =====================
+      Our Team Section
+========================= */
+.team {
+  background-color: #fff;
+  text-align: center;
+}
+.team__header {
+  max-width: 700px;
+  margin: 0 auto 4rem auto;
+}
+.team__subtitle {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.team__desc {
+  color: #777;
+  margin-top: 1rem;
+}
+.team__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .team__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.team-card {
+  background-color: #f9f9f9;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s;
+}
+.team-card:hover {
+  transform: translateY(-5px);
+}
+.team-card__img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+.team-card__name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.team-card__role {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* =====================
+      Follow Us Section
+========================= */
+.follow-us {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-image: url("https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1920&q=80");
+  background-attachment: fixed;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+}
+.follow-us__content {
+  background-color: white;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  width: 400px;
+}
+@media (min-width: 1024px) {
+  .follow-us__content {
+    max-height: 300px;
+    margin: 50px auto;
+  }
+}
+.follow-us__icons {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.follow-us__icons a {
+  color: #2d2d2d;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+.follow-us__icons a:hover {
+  color: #0084D6;
 }
 
 /*# sourceMappingURL=input.css.map */

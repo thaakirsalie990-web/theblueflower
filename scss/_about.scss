@@ -1,0 +1,189 @@
+@use 'variables' as *;
+
+/* =====================
+      About Page Styles
+========================= */
+.hero-about {
+    height: 60vh;
+    min-height: 400px;
+    background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1920&q=80'); // Meeting room/Office
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: -80px; // Pull up behind header (since header is absolute)
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 80, 150, 0.6); // Blue overlay
+    }
+
+    &__content {
+        position: relative;
+        z-index: 10;
+    }
+
+    &__title {
+        color: #fff;
+        font-size: 3.5rem;
+        font-weight: 700;
+        
+        @media (min-width: $break-md) {
+            font-size: 5rem;
+        }
+    }
+}
+
+/* =====================
+      Who We Are Section
+========================= */
+.who-we-are {
+    background-color: #fff;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: $space-5;
+
+        @media (min-width: $break-lg) {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+
+    &__text {
+        flex: 1;
+        p {
+            color: $color-text-light;
+            margin-bottom: $space-3;
+            line-height: 1.8;
+        }
+    }
+
+    &__image {
+        flex: 1;
+        img {
+            width: 100%;
+            height: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+    }
+}
+
+/* =====================
+      Our Team Section
+========================= */
+.team {
+    background-color: #fff; // or very light gray if preferred
+    text-align: center;
+
+    &__header {
+        max-width: 700px;
+        margin: 0 auto $space-6 auto;
+    }
+
+    &__subtitle {
+        font-weight: 600;
+        display: block;
+        margin-bottom: $space-2;
+    }
+
+    &__desc {
+        color: $color-text-light;
+        margin-top: $space-3;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr; // Mobile 1 col
+        gap: $space-5;
+
+        @media (min-width: $break-md) {
+            grid-template-columns: repeat(3, 1fr); // Desktop 3 cols
+        }
+    }
+}
+
+.team-card {
+    background-color: #f9f9f9;
+    padding: $space-5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+
+    &__img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: $space-3;
+    }
+
+    &__name {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    &__role {
+        color: $color-text-light;
+        font-size: 0.9rem;
+    }
+}
+
+/* =====================
+      Follow Us Section
+========================= */
+.follow-us {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1920&q=80');
+    background-attachment: fixed;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+
+
+    &__content {
+        background-color: white;
+        padding: $space-5;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+        width: 400px;
+        
+        @media (min-width: $break-lg) {
+            max-height: 300px;
+            margin: 50px auto;
+        }
+    }
+
+    &__icons {
+        display: flex;
+        gap: $space-4;
+        margin-top: $space-4;
+
+        a {
+            color: $color-text-dark;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+            
+            &:hover {
+                color: $color-primary;
+            }
+        }
+    }
+}
