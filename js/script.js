@@ -240,4 +240,81 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     }
+
+    // --- BLOG FUNCTIONALITY ---
+    
+    const blogGrid = document.getElementById('blogGrid');
+    const blogForm = document.getElementById('blogForm');
+
+    // 1. RENDER BLOG (View Page)
+    if (blogGrid) {
+        let blogPosts = [];
+
+        // A. Load Default JSON Posts
+        fetch('assets/content.json')
+            .then(res => res.json())
+            .then(data => {
+                const jsonPosts = data.blog || [];
+                
+                // B. Load "Custom" Posts from Browser Memory (LocalStorage)
+                const storedPosts = JSON.parse(localStorage.getItem('velora_custom_blog')) || [];
+                
+                // Combine them (Newest first usually, but we'll just append)
+                blogPosts = [...jsonPosts, ...storedPosts];
+                
+                renderBlog(blogPosts);
+            })
+            .catch(err => console.error(err));
+
+        function renderBlog(posts) {
+            if (posts.length === 0) {
+                blogGrid.innerHTML = '<p>No articles found.</p>';
+                return;
+            }
+
+            blogGrid.innerHTML = posts.map(post => `
+                <article class="blog-card">
+                    <div class="blog-card__image-wrapper">
+                        <img src="${post.image}" alt="${post.title}" class="blog-card__img">
+                    </div>
+                    <div class="blog-card__content">
+                        <div class="blog-card__meta">${post.date} | ${post.author || 'Admin'}</div>
+                        <h3 class="blog-card__title"><a href="#">${post.title || post.name}</a></h3>
+                        <p class="blog-card__excerpt">${post.excerpt}</p>
+                        <a href="#" class="blog-card__link">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            `).join('');
+        }
+    }
+
+    // 2. ADD NEW POST (Admin Page)
+    if (blogForm) {
+        blogForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Get values
+            const newPost = {
+                id: Date.now(), // Unique ID
+                title: document.getElementById('postTitle').value,
+                author: document.getElementById('postAuthor').value,
+                image: document.getElementById('postImage').value,
+                excerpt: document.getElementById('postContent').value,
+                date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+            };
+
+            // Get existing custom posts
+            const existingPosts = JSON.parse(localStorage.getItem('velora_custom_blog')) || [];
+            
+            // Add new one
+            existingPosts.push(newPost);
+            
+            // Save back to storage
+            localStorage.setItem('velora_custom_blog', JSON.stringify(existingPosts));
+
+            // Feedback
+            alert('Article Published! Go to the Blog page to see it.');
+            blogForm.reset();
+        });
+    }
 });

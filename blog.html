@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | VELORA</title>
+    <link rel="stylesheet" href="css/input.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <!-- Reuse Static Header -->
+    <header class="header header--static">
+
+        <div class="header__container container">
+
+            
+                <div class="header__logo">
+                    <img src="assets/images/logo.svg" alt="Velora Logo" class="header__logo-img">
+                </div>    
+            
+
+            <nav class="header__nav-desktop">
+            <ul class="header__nav-list">
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            </nav>
+            
+            <div class="header__actions">
+                <div class="header__price">$0.00</div>
+                
+                <div class="header__cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="header__badge">0</span>
+                </div>
+
+                <button class="header__menu-btn" id="menuToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile/Drawer Menu -->
+        <nav class="nav-drawer" id="navDrawer">
+            <button class="nav-drawer__close" id="menuClose">
+                <i class="fa-solid fa-times"></i>
+            </button>
+            <ul class="nav-drawer__list">
+                <li class="nav-drawer__item"><a href="#" class="nav-drawer__link">Home</a></li>
+                <li class="nav-drawer__item"><a href="#about" class="nav-drawer__link">About</a></li>
+                <li class="nav-drawer__item"><a href="#shop" class="nav-drawer__link">Shop</a></li>
+                <li class="nav-drawer__item"><a href="#contact" class="nav-drawer__link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-padding">
+            <div class="container">
+                <div class="shop-toolbar" style="margin-bottom: 2rem;">
+                    <div class="shop-toolbar__breadcrumbs">
+                        <a href="index.html">Home</a> / <span>Blog</span>
+                    </div>
+                    <h1 class="section-title section-title--left">Latest News</h1>
+                </div>
+
+                <!-- Blog Grid -->
+                <div class="blog-grid" id="blogGrid">
+                    <p style="grid-column: 1/-1; text-align: center;">Loading articles...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__container">
+            <div class="footer__col">
+                <h3 class="footer__title">Velora</h3>
+                <p>Fashion & Lifestyle.</p>
+            </div>
+            <div class="footer__col">
+                <h3 class="footer__title">Admin</h3>
+                <ul class="footer__list">
+                    <li><a href="admin.html">Add New Post</a></li> 
+                </ul>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p class="footer__copyright">Copyright © 2025 Velora Fashion</p>
+        </div>
+    </footer>
+
+    <!-- UI Scripts -->
+    <script src="js/script.js"></script>
+
+    <!-- FIREBASE READING LOGIC -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // --- PASTE YOUR FIREBASE CONFIG HERE ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-P26NOcfpqmvRQ-19LpgXTvn4OeqssOk",
+            authDomain: "blue-flower-blog.firebaseapp.com",
+            projectId: "blue-flower-blog",
+            storageBucket: "blue-flower-blog.firebasestorage.app",
+            messagingSenderId: "198793802084",
+            appId: "1:198793802084:web:ba4641b6949b5a84364a71"
+            };
+        // ---------------------------------------
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app); // Add database name here if you used a custom one!
+
+        const blogGrid = document.getElementById('blogGrid');
+
+        async function loadBlog() {
+            let combinedPosts = [];
+
+            // 1. Fetch Static JSON Posts
+            try {
+                const res = await fetch('assets/content.json');
+                const data = await res.json();
+                if(data.blog) {
+                    // Ensure JSON posts have IDs
+                    combinedPosts = data.blog.map(p => ({ ...p, source: 'json' })); 
+                }
+            } catch (err) { console.log("No static blog posts found."); }
+
+            // 2. Fetch Live Firebase Posts
+            try {
+                const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                
+                querySnapshot.forEach((doc) => {
+                    // IMPORTANT: We are now saving the ID!
+                    combinedPosts.unshift({ id: doc.id, ...doc.data(), source: 'firebase' }); 
+                });
+            } catch (err) { console.error("Error connecting to Firebase:", err); }
+
+            renderBlog(combinedPosts);
+        }
+
+        function renderBlog(posts) {
+            if (posts.length === 0) {
+                blogGrid.innerHTML = '<p>No articles found.</p>';
+                return;
+            }
+
+            blogGrid.innerHTML = posts.map(post => {
+                // Truncate text for the card (only show first 100 chars)
+                const excerpt = post.excerpt ? post.excerpt.substring(0, 100) + '...' : '';
+
+                return `
+                <article class="blog-card">
+                    <div class="blog-card__image-wrapper">
+                        <img src="${post.image}" alt="${post.title}" class="blog-card__img" onerror="this.src='https://placehold.co/600x400?text=No+Image'">
+                    </div>
+                    <div class="blog-card__content">
+                        <div class="blog-card__meta">${post.date} | ${post.author || 'Admin'}</div>
+                        <h3 class="blog-card__title"><a href="single-post.html?id=${post.id}&src=${post.source || 'json'}">${post.title || post.name}</a></h3>
+                        <p class="blog-card__excerpt">${excerpt}</p>
+                        
+                        <!-- THE LINK NOW HAS AN ID -->
+                        <a href="single-post.html?id=${post.id}&src=${post.source || 'json'}" class="blog-card__link">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            `}).join('');
+        }
+
+        loadBlog();
+    </script>
+</body>
+</html>

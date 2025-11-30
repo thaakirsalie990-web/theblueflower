@@ -1,0 +1,63 @@
+@use 'variables' as *;
+
+/* =====================
+      Single Post Page
+========================= */
+.single-post {
+    padding: $space-6 0;
+    
+    &__container {
+        max-width: 800px; /* Reading width */
+        margin: 0 auto;
+    }
+
+    &__header {
+        text-align: center;
+        margin-bottom: $space-5;
+    }
+
+    &__meta {
+        color: $color-text-light;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: block;
+        margin-bottom: $space-2;
+    }
+
+    &__title {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        color: $color-text-dark;
+        
+        @media (min-width: $break-md) {
+            font-size: 3.5rem;
+        }
+    }
+
+    &__image {
+        width: 100%;
+        margin-bottom: $space-5;
+        border-radius: 8px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: auto;
+            max-height: 500px; /* Don't be too tall */
+            object-fit: cover;
+        }
+    }
+
+    &__content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #444;
+        
+        /* Add some space between paragraphs if using <br> */
+        br { 
+            display: block; 
+            margin: 10px 0; 
+        }
+    }
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article | VELORA</title>
+    <link rel="stylesheet" href="css/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header header--static">
+        <div class="header__container">
+            <div class="header__logo"><img src="assets/images/logo.svg" alt="Logo" class="header__logo-img"></div>
+            <div class="header__right">
+                 <a href="blog.html" class="btn btn--primary">Back to Blog</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Article Content -->
+        <article class="single-post">
+            <div class="container single-post__container" id="postContainer">
+                <!-- Content loads here... -->
+                <p style="text-align:center; padding: 50px;">Loading article...</p>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container"><p class="footer__copyright">Copyright © 2025 Velora Fashion</p></div>
+    </footer>
+
+    <!-- LOGIC TO LOAD POST -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // --- PASTE YOUR FIREBASE CONFIG HERE ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-P26NOcfpqmvRQ-19LpgXTvn4OeqssOk",
+            authDomain: "blue-flower-blog.firebaseapp.com",
+            projectId: "blue-flower-blog",
+            storageBucket: "blue-flower-blog.firebasestorage.app",
+            messagingSenderId: "198793802084",
+            appId: "1:198793802084:web:ba4641b6949b5a84364a71"
+            };
+        // ---------------------------------------
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const container = document.getElementById('postContainer');
+
+        async function loadSinglePost() {
+            // 1. Get ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+            const source = urlParams.get('src'); // 'firebase' or 'json'
+
+            if (!postId) {
+                container.innerHTML = '<h2>Article not found.</h2>';
+                return;
+            }
+
+            let post = null;
+
+            // 2. Fetch based on source
+            if (source === 'firebase') {
+                try {
+                    const docRef = doc(db, "posts", postId);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        post = docSnap.data();
+                    }
+                } catch (e) { console.error(e); }
+            } else {
+                // Fetch from JSON
+                try {
+                    const res = await fetch('assets/content.json');
+                    const data = await res.json();
+                    post = data.blog.find(p => p.id == postId);
+                } catch (e) { console.error(e); }
+            }
+
+            // 3. Render
+            if (post) {
+                container.innerHTML = `
+                    <div class="single-post__header">
+                        <span class="single-post__meta">${post.date} &bull; ${post.author || 'Admin'}</span>
+                        <h1 class="single-post__title">${post.title || post.name}</h1>
+                    </div>
+                    <div class="single-post__image">
+                        <img src="${post.image}" alt="${post.title}" onerror="this.src='https://placehold.co/1200x600?text=No+Image'">
+                    </div>
+                    <div class="single-post__content">
+                        ${post.excerpt.replace(/\n/g, '<br>')} <!-- Preserves line breaks -->
+                    </div>
+                `;
+            } else {
+                container.innerHTML = '<h2>Article not found.</h2><p>It may have been deleted.</p>';
+            }
+        }
+
+        loadSinglePost();
+    </script>
+</body>
+</html>

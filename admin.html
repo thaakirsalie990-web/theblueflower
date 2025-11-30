@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Blog | VELORA Admin</title>
+    <link rel="stylesheet" href="css/input.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .admin-wrapper { max-width: 800px; margin: 4rem auto; }
+        .admin-card { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .form-group textarea { height: 100px; }
+
+        /* Post List Styles */
+        .post-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid #eee; }
+        .post-item:last-child { border-bottom: none; }
+        .post-info h4 { margin: 0 0 5px 0; font-size: 1.1rem; }
+        .post-info span { font-size: 0.85rem; color: #777; }
+        
+        .btn-delete { background: #ff4444; color: white; border: none; padding: 5px 15px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
+        .btn-delete:hover { background: #cc0000; }
+    </style>
+</head>
+<body>
+    <header class="header header--static">
+        <div class="header__container">
+            <div class="header__logo"><img src="assets/images/logo.svg" alt="Logo" class="header__logo-img"></div>
+            <a href="blog.html" class="btn btn--primary">Back to Blog</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="admin-wrapper">
+            
+            <!-- SECTION 1: ADD NEW POST -->
+            <div class="admin-card">
+                <h2 class="section-title section-title--left">Add New Article</h2>
+                <form id="blogForm">
+                    <div class="form-group">
+                        <label>Article Title</label>
+                        <input type="text" id="postTitle" required placeholder="e.g. Summer Trends">
+                    </div>
+                    <div class="form-group">
+                        <label>Author</label>
+                        <input type="text" id="postAuthor" required placeholder="e.g. John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Image URL</label>
+                        <input type="url" id="postImage" required placeholder="https://..." value="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=600&q=80">
+                    </div>
+                    <div class="form-group">
+                        <label>Content / Excerpt</label>
+                        <textarea id="postContent" required placeholder="Write your article summary here..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary" style="width: 100%;">Publish Post</button>
+                </form>
+            </div>
+
+            <!-- SECTION 2: MANAGE POSTS -->
+            <div class="admin-card">
+                <h2 class="section-title section-title--left">Manage Existing Posts</h2>
+                <p style="margin-bottom: 1rem; color: #666; font-size: 0.9rem;">Note: You can only delete posts added via Firebase, not the hardcoded JSON ones.</p>
+                <div id="postsList">
+                    <p>Loading posts...</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FIREBASE LOGIC -->
+    <script type="module">
+        // 1. Import 'deleteDoc' and 'doc'
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // --- PASTE YOUR FIREBASE CONFIG HERE ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-P26NOcfpqmvRQ-19LpgXTvn4OeqssOk",
+            authDomain: "blue-flower-blog.firebaseapp.com",
+            projectId: "blue-flower-blog",
+            storageBucket: "blue-flower-blog.firebasestorage.app",
+            messagingSenderId: "198793802084",
+            appId: "1:198793802084:web:ba4641b6949b5a84364a71"
+            };
+        // ---------------------------------------
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- PART A: ADD POST ---
+        document.getElementById('blogForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = "Publishing...";
+            btn.disabled = true;
+
+            try {
+                await addDoc(collection(db, "posts"), {
+                    title: document.getElementById('postTitle').value,
+                    author: document.getElementById('postAuthor').value,
+                    image: document.getElementById('postImage').value,
+                    excerpt: document.getElementById('postContent').value,
+                    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+                    createdAt: Date.now()
+                });
+                alert('Success!');
+                e.target.reset();
+                loadPostsForManagement(); // Refresh list immediately
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Error saving post.");
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // --- PART B: LIST & DELETE POSTS ---
+        async function loadPostsForManagement() {
+            const listContainer = document.getElementById('postsList');
+            listContainer.innerHTML = '<p>Loading...</p>';
+
+            try {
+                const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                
+                if (querySnapshot.empty) {
+                    listContainer.innerHTML = '<p>No Firebase posts found.</p>';
+                    return;
+                }
+
+                let html = '';
+                querySnapshot.forEach((document) => {
+                    const post = document.data();
+                    const id = document.id; // This is the ID we need to delete!
+
+                    html += `
+                        <div class="post-item" id="post-${id}">
+                            <div class="post-info">
+                                <h4>${post.title}</h4>
+                                <span>${post.date} by ${post.author}</span>
+                            </div>
+                            <button class="btn-delete" data-id="${id}">
+                                <i class="fa-solid fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    `;
+                });
+
+                listContainer.innerHTML = html;
+
+                // Add Event Listeners to all Delete Buttons
+                document.querySelectorAll('.btn-delete').forEach(button => {
+                    button.addEventListener('click', async (e) => {
+                        const postId = e.currentTarget.getAttribute('data-id');
+                        
+                        if(confirm('Are you sure you want to delete this post?')) {
+                            await deletePost(postId);
+                        }
+                    });
+                });
+
+            } catch (err) {
+                console.error(err);
+                listContainer.innerHTML = '<p>Error loading posts.</p>';
+            }
+        }
+
+        async function deletePost(docId) {
+            try {
+                // The Magic Line: Deletes from Firebase
+                await deleteDoc(doc(db, "posts", docId));
+                
+                // Remove from HTML immediately (makes it feel fast)
+                document.getElementById(`post-${docId}`).remove();
+                
+            } catch (error) {
+                console.error("Error removing document: ", error);
+                alert("Could not delete. Check console.");
+            }
+        }
+
+        // Load list when page opens
+        loadPostsForManagement();
+
+    </script>
+</body>
+</html>
