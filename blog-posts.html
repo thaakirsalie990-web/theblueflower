@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Article | VELORA</title>
-    <link rel="stylesheet" href="css/output.css">
+    <link rel="stylesheet" href="css/input.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -28,10 +28,50 @@
             </div>
         </article>
     </main>
-
-    <!-- Footer -->
+    <!-- =====================
+            Footer
+    ========================== -->
     <footer class="footer">
-        <div class="container"><p class="footer__copyright">Copyright © 2025 Velora Fashion</p></div>
+        <div class="container footer__container">
+            <div class="footer__col">
+                <h3 class="footer__title">Quick Links</h3>
+                <ul class="footer__list">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Cart</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h3 class="footer__title">For Her</h3>
+                <ul class="footer__list">
+                    <li><a href="#">Women Jeans</a></li>
+                    <li><a href="#">Tops and Shirts</a></li>
+                    <li><a href="#">Women Jackets</a></li>
+                    <li><a href="#">Heels and Flats</a></li>
+                    <li><a href="#">Women Accessories</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h3 class="footer__title">For Him</h3>
+                <ul class="footer__list">
+                    <li><a href="#">Men Jeans</a></li>
+                    <li><a href="#">Men Shirts</a></li>
+                    <li><a href="#">Men Shoes</a></li>
+                    <li><a href="#">Men Accessories</a></li>
+                    <li><a href="#">Men Jackets</a></li>
+                </ul>
+            </div>
+            <div class="footer__col footer__col--app">
+                <h3 class="footer__title">Get The App</h3> 
+                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" width="150">
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p class="footer__copyright">Copyright © 2025 Velora Fashion</p>
+            <p class="footer__powered">Powered by Brandstore</p>
+        </div>
     </footer>
 
     <!-- LOGIC TO LOAD POST -->
@@ -96,7 +136,7 @@
                     <div class="single-post__image">
                         <img src="${post.image}" alt="${post.title}" onerror="this.src='https://placehold.co/1200x600?text=No+Image'">
                     </div>
-                    <div class="single-post__content">
+                    <div class="single-post__content article-content">
                         ${post.excerpt.replace(/\n/g, '<br>')} <!-- Preserves line breaks -->
                     </div>
                 `;

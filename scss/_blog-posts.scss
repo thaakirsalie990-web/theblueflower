@@ -61,3 +61,101 @@
         }
     }
 }
+
+/* =====================
+      Article Readability System (Prose)
+========================= */
+
+.article-content {
+    /* 1. Base Readability Settings */
+    font-family: 'Georgia', 'Times New Roman', serif; /* Serif is often better for long reading */
+    /* OR keep sans-serif if you prefer modern look: */
+    /* font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; */
+    
+    font-size: 1.125rem; /* 18px - Standard for modern blogs */
+    line-height: 1.8;    /* Open line spacing prevents eye strain */
+    color: #2d3748;      /* Soft dark gray, easier on eyes than #000 */
+    
+    /* 2. Limit Line Width (Crucial for readability) */
+    max-width: 70ch;     /* ~70 characters per line is optimal for human eyes */
+    margin: 0 auto;      /* Center the text block */
+    
+    /* 3. Handle Elements Automatically */
+    
+    /* Paragraphs */
+    p {
+        margin-bottom: 1.5em; /* Breathing room between thoughts */
+    }
+
+    /* Headings (H1, H2, H3 from Editor) */
+    h1, h2, h3, h4 {
+        color: #1a202c; /* Darker/Bolder */
+        font-weight: 700;
+        line-height: 1.3;
+        margin-top: 2.5em; /* Big space before new section */
+        margin-bottom: 0.8em; /* Small space after header */
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Keep headers modern */
+    }
+
+    h1 { font-size: 2.25rem; }
+    h2 { font-size: 1.8rem; border-bottom: 2px solid #edf2f7; padding-bottom: 0.3em; }
+    h3 { font-size: 1.5rem; }
+
+    /* Lists */
+    ul, ol {
+        margin-bottom: 1.5em;
+        padding-left: 1.5em;
+    }
+    
+    li {
+        margin-bottom: 0.5em;
+        padding-left: 0.5em;
+    }
+    
+    ul li { list-style-type: disc; }
+    ol li { list-style-type: decimal; }
+
+    /* Links */
+    a {
+        color: #0084D6;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        transition: color 0.2s;
+        
+        &:hover {
+            color: #000;
+            background-color: rgba(0, 132, 214, 0.1);
+        }
+    }
+
+    /* Blockquotes (Quotes) */
+    blockquote {
+        font-style: italic;
+        border-left: 4px solid #0084D6;
+        background-color: #f7fafc;
+        padding: 1em 1.5em;
+        margin: 2em 0;
+        color: #4a5568;
+        border-radius: 0 8px 8px 0;
+    }
+
+    /* Images inside the text */
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 2.5em auto; /* Center image with space */
+        border-radius: 8px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Code Blocks (if you post code) */
+    pre, code {
+        background-color: #edf2f7;
+        padding: 0.2em 0.4em;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 0.9em;
+        color: #c53030;
+    }
+}

@@ -160,11 +160,11 @@
                     </div>
                     <div class="blog-card__content">
                         <div class="blog-card__meta">${post.date} | ${post.author || 'Admin'}</div>
-                        <h3 class="blog-card__title"><a href="single-post.html?id=${post.id}&src=${post.source || 'json'}">${post.title || post.name}</a></h3>
+                        <h3 class="blog-card__title"><a href="blog-posts.html?id=${post.id}&src=${post.source || 'json'}">${post.title || post.name}</a></h3>
                         <p class="blog-card__excerpt">${excerpt}</p>
                         
                         <!-- THE LINK NOW HAS AN ID -->
-                        <a href="single-post.html?id=${post.id}&src=${post.source || 'json'}" class="blog-card__link">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="blog-posts.html?id=${post.id}&src=${post.source || 'json'}" class="blog-card__link">Read More <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </article>
             `}).join('');
